@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Optimale Schreibtischhöhe berechnen</title>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#clickbtn").click(function() {
+        var gettabletype = $("input[name='tabletype']:checked").val();
+        var height = $("#height").val();
+        if($.isNumeric(height) && height <= 200){
+          var divides = 2.48;
+          if(gettabletype == 2){
+            divides = 1.52;
+          }
+          var result = height / divides;
+          $("#result").show();
+
+          $("#result span").html(Math.round(result));
+        }else{
+          alert("Please enter valid numeric value less than 200 cm.")
+        }
+      });
+    });
+  </script>
+
+  <style type="text/css">
+    body *{font-family: arial;}
+    form{padding: 20px;}
+    .radio{
+      float:left;
+      margin-right: 20px;
+    }
+    .btn.btn-primary {
+      margin-left: 6px;
+    }
+  </style>
+
+  <form class="height-calc" method="post">
+
+    <h2>Calculate the optimal height</h2>
+
+    <div class="form-group">
+      <div class="radio">
+        <label for="tabletype-0">
+          <input type="radio" name="tabletype" id="tabletype-0" value="1" checked="checked">Sitting</label>
+      </div>
+      <div class="radio">
+        <label for="tabletype-1">
+          <input type="radio" name="tabletype" id="tabletype-1" value="2">Standing</label>
+      </div>
+    </div>
+
+    <div class="form-group" style="float: left;
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 19px;
+    margin-left: 5px;">
+      <label class="col-md-4 control-label" for="textinput">Height</label>  
+      <input id="height" name="height" type="text" class="form-control input-md">
+      <span class="help-block">cm</span>  
+    </div>
+
+    <div class="form-group">
+        <input type="button" id="clickbtn" name="clickbtn" class="btn btn-primary" value="Calculate">
+    </div>
+
+    <div id="result" style="display: none;">
+    <h2>Recommended height</h2>
+    <p>Table height in centimeters <span></span> cm.</p>
+    </div>
+  </form>
+  </body>
+</html>
